@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort with JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('bg-img.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .container {
+            height: 600px;
+            width: 800px;
+            margin: 0 auto;
+            background: transparent;
+            border: 2px solid rgba(225,225,225,0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            text-align: justify;
+            color: #07090ddb;
+            font-size: 22px;
+        }
+        input[type="text"], input[type="button"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #33c830;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Quick Sort Algorithm</h1>
+    <p>
+        Quick Sort is an efficient, comparison-based sorting algorithm that follows a divide-and-conquer strategy. 
+        It works by selecting a "pivot" element from the array and partitioning the other elements into two sub-arrays: those less than the pivot and those greater than it. 
+        The pivot is then placed in its correct position in the sorted array. This process is recursively applied to the left and right sub-arrays until the entire array is sorted. 
+        Quick Sort is generally faster than other sorting algorithms, such as Bubble Sort or Insertion Sort, with an average time complexity of O(n log n), although its worst-case performance can degrade to O(n²) if the pivot is poorly chosen.
+    </p>
+    
+    <input type="text" id="unsortedData" placeholder="Enter Unsorted Data e.g. 34,12,45">
+    <input type="button" value="Sort" onclick="sortData()">
+    
+    <div class="result">
+        <p id="sortedResult"></p>
+    </div>
+</div>
+
+<script>
+    function quickSort(arr) {
+        if (arr.length <= 1) {
+            return arr;
+        }
+        let pivot = arr[arr.length - 1]; 
+        let left = []; 
+        let right = []; 
+        for (let i = 0; i < arr.length - 1; i++) {
+            if (arr[i] < pivot) {
+                left.push(arr[i]);
+            } else {
+                right.push(arr[i]);
+            }
+        }
+        return [...quickSort(left), pivot, ...quickSort(right)];
+    }
+    function sortData() {
+        const input = document.getElementById("unsortedData").value;
+        let arr = input.split(',').map(Number);
+        let sortedArray = quickSort(arr);
+        document.getElementById("sortedResult").innerText = "Sorted Data: " + sortedArray.join(', ');
+    }
+  
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort with JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('bg-img.jpg');
+            background-size: cover; 
+            background-repeat: no-repeat;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .container {
+            height: 600px;
+            width: 800px;
+            margin: 0 auto;
+            background: transparent;
+            border: 2px solid rgba(225,225,225,0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            text-align: justify;
+            color: #07090ddb;
+            font-size: 22px;
+        }
+        input[type="text"], input[type="button"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #33c830;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Counting Sort Algorithm</h1>
+    <p>
+        Counting Sort is a non-comparative, integer-based sorting algorithm that works by counting the occurrences of each unique element in the input array. 
+        It operates by creating a "count" array where the index represents the elements from the input, and the values at each index represent the frequency of those elements. 
+        After counting, the algorithm computes cumulative sums to determine the position of each element in the sorted output. 
+        Finally, it places the elements into the correct position in a new sorted array. Counting Sort is highly efficient for sorting integers within a known range, with a time complexity of O(n + k), where n is the number of elements and k is the range of input values.
+        
+    </p>
+    
+    <input type="text" id="unsortedData" placeholder="Enter Unsorted Data e.g. 34,12,45">
+    <input type="button" value="Sort" onclick="sortData()">
+    
+    <div class="result">
+        <p id="sortedResult"></p>
+    </div>
+</div>
+
+<script>
+    function countingSort(arr) {
+        let max = Math.max(...arr);
+        let min = Math.min(...arr);
+        let range = max - min + 1;
+        
+        let count = new Array(range).fill(0); 
+        let output = new Array(arr.length).fill(0); 
+        for (let i = 0; i < arr.length; i++) {
+            count[arr[i] - min]++;
+        }
+        for (let i = 1; i < count.length; i++) {
+            count[i] += count[i - 1];
+        }
+        for (let i = arr.length - 1; i >= 0; i--) {
+            output[count[arr[i] - min] - 1] = arr[i];
+            count[arr[i] - min]--;
+        }
+
+        return output;
+    }
+    function sortData() {
+        const input = document.getElementById("unsortedData").value;
+        let arr = input.split(',').map(Number);
+        let sortedArray = countingSort(arr);
+        document.getElementById("sortedResult").innerText = "Sorted Data: " + sortedArray.join(', ');
+    }
+    
+</script>
+
+</body>
+</html>

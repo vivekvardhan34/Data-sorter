@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort with JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('bg-img.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .container {
+            height: 600px;
+            width: 800px;
+            margin: 0 auto;
+            background: transparent;
+            border: 2px solid rgba(225,225,225,0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            text-align: justify;
+            color: #07090ddb;
+            font-size: 22px;
+        }
+        input[type="text"], input[type="button"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #33c830;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Bubble Sort Algorithm</h1>
+    <p>Bubble Sort is a simple comparison-based sorting algorithm. 
+        It repeatedly steps through a list of unsorted elements, compares adjacent elements, and swaps them if they are in the wrong order (i.e., if the left element is larger than the right one). 
+        This process is repeated for each element in the list, with the largest elements "bubbling" to the end of the list in each pass. The algorithm continues until no more swaps are needed, meaning the list is fully sorted. 
+        Although easy to understand and implement, Bubble Sort is not efficient for large lists because it has a time complexity of O(n²).
+    </p>
+    
+    <input type="text" id="unsortedData" placeholder="Enter Unsorted Data e.g. 34,12,45">
+    <input type="button" value="Sort" onclick="sortData()">
+    
+    <div class="result">
+        <p id="sortedResult"></p>
+    </div>
+</div>
+
+<script>
+    function bubbleSort(arr) {
+        let n = arr.length;
+        for (let i = 0; i < n - 1; i++) {
+            for (let j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    let temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        return arr;
+    }
+    function sortData() {
+        const input = document.getElementById("unsortedData").value;
+        let arr = input.split(',').map(Number);
+        let sortedArray = bubbleSort(arr);
+        document.getElementById("sortedResult").innerText = "Sorted Data: " + sortedArray.join(', ');
+    }
+</script>
+
+</body>
+</html>
